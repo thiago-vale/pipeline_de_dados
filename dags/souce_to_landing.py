@@ -16,13 +16,13 @@ def transform(ti):
 def load(ti):
     data = ti.xcom_pull(task_ids='transform')
     df = pd.DataFrame.from_dict(data)
-    csv_buffer = df.to_csv(index=False)
+    csv_buffer = df.to_parquet(index=False)
 
     s3 = boto3.client('s3')
     try:
         response = s3.put_object(
             Bucket='datalake-test-thiago',
-            Key='00-landing/train.csv',
+            Key='00-landing/pandas/train.csv',
             Body=csv_buffer.encode('utf-8')
         )
         print(f'Arquivo train.csv salvo com sucesso no S3.')
@@ -39,7 +39,7 @@ default_args = {
     'retries' : 3
 }
 
-with DAG( 'etl',
+with DAG( 'source_to_landing',
          default_args=default_args,
          description='pipeline source to landing',
          schedule_interval='3 * * * *',

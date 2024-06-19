@@ -7,7 +7,6 @@ import boto3
 def extract():
     s3 = boto3.client('s3')  # Cria um cliente S3
 
-    # Faz o download do arquivo CSV do S3
     obj = s3.get_object(Bucket='datalake-test-thiago', Key='00-landing/train.csv')
     df = pd.read_csv(obj['Body'])
 
@@ -22,14 +21,14 @@ def transform(ti):
 def load(ti):
     data = ti.xcom_pull(task_ids='transform')
     df = pd.DataFrame.from_dict(data)
-    csv_buffer = df.to_csv(index=False)
+    csv_buffer = df.to_parquet(index=False)
 
     s3 = boto3.client('s3')
     try:
         response = s3.put_object(
             Bucket='datalake-test-thiago',
-            Key='01-bronze/train.csv',
-            Body=csv_buffer.encode('utf-8')
+            Key='01-bronze/pandas/train.parquet',
+            Body=csv_buffer
         )
         print(f'Arquivo train.csv salvo com sucesso no S3.')
     except Exception as e:
@@ -45,7 +44,7 @@ default_args = {
     'retries' : 3
 }
 
-with DAG( 'etl',
+with DAG( 'landing_to_bronze',
          default_args=default_args,
          description='pipeline slanding to bronze',
          schedule_interval='3 * * * *',

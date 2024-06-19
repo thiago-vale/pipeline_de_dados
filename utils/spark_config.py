@@ -2,6 +2,9 @@ from pyspark.sql import SparkSession
 from pyspark import SparkConf
 from delta import *
 import os
+import sys
+sys.path.append('/home/thiago/Documentos/GitHub/pipeline_de_dados/utils')
+
 from read import Read
 
 
@@ -21,9 +24,9 @@ class SparkConfig():
         
         
         spark_jars = '''
-            aws-java-sdk-1.7.4.jar,
-            hadoop-aws-2.7.7.jar,
-            jets3t-0.9.4.jar
+            /home/thiago/Documentos/GitHub/pipeline_de_dados/utils/spark_jars/aws-java-sdk-1.7.4.jar,
+            /home/thiago/Documentos/GitHub/pipeline_de_dados/utils/spark_jars/hadoop-aws-2.7.7.jar,
+            /home/thiago/Documentos/GitHub/pipeline_de_dados/utils/spark_jars/jets3t-0.9.4.jar
             '''
 
         conf = (
