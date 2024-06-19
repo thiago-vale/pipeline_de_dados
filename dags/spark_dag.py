@@ -19,10 +19,16 @@ dag = DAG(
     schedule_interval=timedelta(days=1),
 )
 
-run_etl = BashOperator(
-    task_id='run_etl_script',
-    bash_command='python /home/thiago/Documentos/GitHub/pipeline_de_dados/src/spark_etl.py',
+source_to_landing = BashOperator(
+    task_id='source_to_landing',
+    bash_command='python /home/thiago/Documentos/GitHub/pipeline_de_dados/src/source_to_landing.py',
     dag=dag,
 )
 
-run_etl
+landing_to_bronze = BashOperator(
+    task_id='source_to_landing',
+    bash_command='python /home/thiago/Documentos/GitHub/pipeline_de_dados/src/landing_to_bronze.py',
+    dag=dag,
+)
+
+source_to_landing >> landing_to_bronze
