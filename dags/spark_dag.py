@@ -21,14 +21,26 @@ dag = DAG(
 
 source_to_landing = BashOperator(
     task_id='source_to_landing',
-    bash_command='python /home/thiago/Documentos/GitHub/pipeline_de_dados/src/source_to_landing.py',
+    bash_command='python /home/thiago/Documentos/GitHub/pipeline_de_dados/src/00_source_to_landing.py',
     dag=dag,
 )
 
 landing_to_bronze = BashOperator(
-    task_id='source_to_landing',
-    bash_command='python /home/thiago/Documentos/GitHub/pipeline_de_dados/src/landing_to_bronze.py',
+    task_id='landing_to_bronze',
+    bash_command='python /home/thiago/Documentos/GitHub/pipeline_de_dados/src/01_landing_to_bronze.py',
     dag=dag,
 )
 
-source_to_landing >> landing_to_bronze
+bronze_to_silver = BashOperator(
+    task_id='bronze_to_silver',
+    bash_command='python /home/thiago/Documentos/GitHub/pipeline_de_dados/src/02_bronze_to_silver.py',
+    dag=dag,
+)
+
+silver_to_gold = BashOperator(
+    task_id='silver_to_gold',
+    bash_command='python /home/thiago/Documentos/GitHub/pipeline_de_dados/src/03_silver_to_gold.py',
+    dag=dag,
+)
+
+source_to_landing >> landing_to_bronze >> bronze_to_silver >> silver_to_gold
