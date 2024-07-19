@@ -20,7 +20,6 @@ def run_etl():
         logger.info("Data loaded successfully")
 
         # Trnaformar Dados
-
         df = df.withColumn('Age_Group',
                         F.when(F.col('Age') < 25, '18-24')
                             .when(F.col('Age').between(25, 34), '25-34')
