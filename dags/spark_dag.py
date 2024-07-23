@@ -43,4 +43,10 @@ silver_to_gold = BashOperator(
     dag=dag,
 )
 
-source_to_landing >> landing_to_bronze >> bronze_to_silver >> silver_to_gold
+gold_to_modeled = BashOperator(
+    task_id='gold_to_modeled',
+    bash_command='python /home/thiago/Documentos/GitHub/pipeline_de_dados/src/04_gold_to_modeled.py',
+    dag=dag,
+)
+
+source_to_landing >> landing_to_bronze >> bronze_to_silver >> silver_to_gold >> gold_to_modeled
