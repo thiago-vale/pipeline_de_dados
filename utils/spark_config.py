@@ -1,6 +1,7 @@
 from pyspark.sql import SparkSession
 from pyspark import SparkConf
 from delta import *
+from delta.tables import *
 import os
 import sys
 sys.path.append('/home/thiago/Documentos/GitHub/pipeline_de_dados/utils')
@@ -19,7 +20,7 @@ class SparkConfig():
         config = {
             'aws_access_key_id': aws_key,
             'aws_secret_access_key': aws_pass,
-            'bucket': 'sdatalake-test-thiago',
+            'bucket': 'datalake-test-thiago',
         }
         
         
@@ -56,8 +57,8 @@ class SparkConfig():
                 .set('spark.ui.showConsoleProgress', True)
                 .set('spark.logConf', True)
                 .set('spark.driver.bindAddress', '0.0.0.0')
-                #.set("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
-                #.set("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
+                .set("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
+                .set("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
                 #.set('spark.delta.logStore.class', 'org.apache.spark.sql.delta.storage.S3SingleDriverLogStore')
             )
 
@@ -68,8 +69,9 @@ class SparkConfig():
                 #.config("spark.jars.packages", "io.delta:delta-core_2.12:1.0.0")
                 .master('local[*]')
                 .appName('PySpark')
-                .getOrCreate()
             )
+        
+        spark = configure_spark_with_delta_pip(spark).getOrCreate()
 
         spark._jsc.hadoopConfiguration().set("fs.s3a.awsAccessKeyId", config['aws_access_key_id'])
         spark._jsc.hadoopConfiguration().set("fs.s3a.awsSecretAccessKey", config['aws_secret_access_key'])

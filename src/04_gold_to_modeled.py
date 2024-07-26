@@ -23,7 +23,7 @@ def run_etl():
 
 
         # Salvar dados no S3
-        df.write.format('parquet').mode('overwrite').save('s3a://datalake-test-thiago/04-modeled/spark/train')
+        df.write.format('delta').mode(saveMode="overwrite").save('s3a://datalake-test-thiago/04-modeled/spark/train')
         logger.info("Data saved to S3 successfully")
 
         # Finaliza a SparkSession
