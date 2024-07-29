@@ -47,7 +47,7 @@ default_args = {
 with DAG( 'landing_to_bronze',
          default_args=default_args,
          description='pipeline slanding to bronze',
-         schedule_interval='3 * * * *',
+         schedule_interval='@daily',
          catchup=False) as dag:
     
     extract = PythonOperator(

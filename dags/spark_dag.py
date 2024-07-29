@@ -16,7 +16,7 @@ dag = DAG(
     'spark_etl_dag',
     default_args=default_args,
     description='A simple DAG to run Spark ETL script',
-    schedule_interval=timedelta(days=1),
+    schedule_interval='@daily',
 )
 
 source_to_landing = BashOperator(

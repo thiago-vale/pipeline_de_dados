@@ -42,7 +42,7 @@ default_args = {
 with DAG( 'source_to_landing',
          default_args=default_args,
          description='pipeline source to landing',
-         schedule_interval='3 * * * *',
+         schedule_interval='@daily',
          catchup=False) as dag:
     
     extract = PythonOperator(
