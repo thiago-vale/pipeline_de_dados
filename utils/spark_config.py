@@ -59,14 +59,14 @@ class SparkConfig():
                 .set('spark.driver.bindAddress', '0.0.0.0')
                 .set("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
                 .set("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
-                #.set('spark.delta.logStore.class', 'org.apache.spark.sql.delta.storage.S3SingleDriverLogStore')
+                .set('spark.delta.logStore.class', 'org.apache.spark.sql.delta.storage.S3SingleDriverLogStore')
             )
 
         spark = (
                 SparkSession
                 .builder
                 .config(conf=conf)
-                #.config("spark.jars.packages", "io.delta:delta-core_2.12:1.0.0")
+                .config("spark.jars.packages", "io.delta:delta-core_2.12:1.0.0")
                 .master('local[*]')
                 .appName('PySpark')
             )
