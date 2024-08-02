@@ -60,12 +60,12 @@ def run_etl():
         df = df.withColumn('competition_open_since_year', col('competition_open_since_year').cast(IntegerType()))
         df = df.withColumn('promo2_since_week', col('promo2_since_week').cast(IntegerType()))
         df = df.withColumn('promo2_since_year', col('promo2_since_year').cast(IntegerType()))
-        
+
         logger.info("Data Transform successfully")
 
 
         # Salvar dados no S3
-        df.write.format('parquet').mode('overwrite').save('s3a://datalake-test-thiago/02-silver/spark/train')
+        df.write.format('parquet').mode('overwrite').save('s3a://datalake-test-thiago/02-silver/spark/store_sales')
         logger.info("Data saved to S3 successfully")
   
         # Finaliza a SparkSession
