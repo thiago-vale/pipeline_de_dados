@@ -39,6 +39,7 @@ class SparkConfig():
                 .set('spark.sql.parquet.int96RebaseModeInWrite', 'LEGACY')
                 .set('spark.sql.parquet.datetimeRebaseModeInRead', 'LEGACY')
                 .set('spark.sql.parquet.datetimeRebaseModeInWrite', 'LEGACY')
+                .set("spark.sql.legacy.timeParserPolicy", "LEGACY")
                 .set('spark.network.timeout', '100000000')
                 .set('spark.executor.heartbeatInterval', '100000000')
                 .set('spark.executor.memory', '12G') #quanto aloca memória local

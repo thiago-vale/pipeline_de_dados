@@ -4,8 +4,11 @@ sys.path.append('/home/thiago/Documentos/GitHub/pipeline_de_dados/utils')
 from spark_config import SparkConfig
 import logging
 import inflection
-from pyspark.sql.functions import col, when, isnan, month, year, weekofyear, lit, split, array_contains, to_date
-from pyspark.sql.types import IntegerType
+from pyspark.sql.functions import col, when, isnan, month, year, weekofyear,\
+      lit, split, array_contains, to_date, dayofmonth, date_format, expr
+from pyspark.sql.types import IntegerType, DateType
+from datetime import datetime, timedelta
+
 
 def run_etl():
     logging.basicConfig(level=logging.INFO)
@@ -61,11 +64,27 @@ def run_etl():
         df = df.withColumn('promo2_since_week', col('promo2_since_week').cast(IntegerType()))
         df = df.withColumn('promo2_since_year', col('promo2_since_year').cast(IntegerType()))
 
+        df = df.withColumn('year', year(col('date')))
+        df = df.withColumn('month', month(col('date')))
+        df = df.withColumn('day', dayofmonth(col('date')))
+        df = df.withColumn('week_of_year', weekofyear(col('date')))
+        df = df.withColumn('year_week', date_format(col('date'), 'yyyy-ww'))
+        df = df.withColumn('competition_since', expr("make_date(competition_open_since_year, competition_open_since_month, 1)"))
+        df = df.withColumn('competition_time_month', ((col('date').cast("long") - col('competition_since').cast("long")) / 30).cast(IntegerType()))
+        df = df.withColumn('promo_since', expr("date_add(make_date(promo2_since_year, 1, 1), (promo2_since_week - 1) * 7 - 1)"))
+        df = df.withColumn('promo_time_week', ((col('date').cast("long") - col('promo_since').cast("long")) / 7).cast(IntegerType()))
+        df = df.withColumn('assortment', when(col('assortment') == 'a', 'basic')
+                   .when(col('assortment') == 'b', 'extra')
+                   .otherwise('extended'))
+        df = df.withColumn('state_holiday', when(col('state_holiday') == 'a', 'public_holiday')
+                   .when(col('state_holiday') == 'b', 'easter_holiday')
+                   .when(col('state_holiday') == 'c', 'christmas')
+                   .otherwise('regular_day'))
+
         logger.info("Data Transform successfully")
 
-
         # Salvar dados no S3
-        df.write.format('parquet').mode('overwrite').save('s3a://datalake-test-thiago/02-silver/spark/store_sales')
+        df.write.format('delta').mode('overwrite').save('s3a://datalake-test-thiago/02-silver/delta/store_sales')
         logger.info("Data saved to S3 successfully")
   
         # Finaliza a SparkSession
