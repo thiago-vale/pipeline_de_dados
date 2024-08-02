@@ -22,6 +22,22 @@ def run_etl():
         df.write.format('parquet').mode('overwrite').save('s3a://datalake-test-thiago/00-landing/spark/train')
         logger.info("Data saved to S3 successfully")
 
+        # Carregar dados
+        df = spark.read.csv("/home/thiago/Documentos/GitHub/pipeline_de_dados/data/raw/test.csv", header=True, inferSchema=True)
+        logger.info("Data loaded successfully")
+
+        # Salvar dados no S3
+        df.write.format('parquet').mode('overwrite').save('s3a://datalake-test-thiago/00-landing/spark/test')
+        logger.info("Data saved to S3 successfully")
+
+        # Carregar dados
+        df = spark.read.csv("/home/thiago/Documentos/GitHub/pipeline_de_dados/data/raw/store.csv", header=True, inferSchema=True)
+        logger.info("Data loaded successfully")
+
+        # Salvar dados no S3
+        df.write.format('parquet').mode('overwrite').save('s3a://datalake-test-thiago/00-landing/spark/store')
+        logger.info("Data saved to S3 successfully")
+
         # Finaliza a SparkSession
         spark.stop()
         logger.info("Spark session stopped")
