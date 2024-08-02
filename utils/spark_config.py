@@ -60,7 +60,7 @@ class SparkConfig():
                 .set("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
                 .set("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
                 .set('spark.delta.logStore.class', 'org.apache.spark.sql.delta.storage.S3SingleDriverLogStore')
-                .set('spark.sql.files.maxPartitionBytes', '128m')  # Definir o tamanho máximo de partição para leitura de arquivos
+                .set('spark.sql.parquet.compression.codec', 'snappy')
             )
 
         spark = (
