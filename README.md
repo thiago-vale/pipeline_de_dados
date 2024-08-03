@@ -24,8 +24,6 @@ Este projeto consiste no desenvolvimento de pipelines de dados para um Data Lake
 - **Airflow**
 - **Pyspark**
 - **AWS**
-- **Terraform**
-- **Kubernetes**
 
 ## Rodando Localmente
 
