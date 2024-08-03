@@ -49,13 +49,16 @@ https://github.com/thiago-vale/pipeline_de_dados/tree/master/utils
 - Aqui se encontram os arquivos usados no projeto como Configuração do Spark, jars para conexão com AWS, Classes e metodos usados ao longo do mesmo.
 
 #### read.py
-- Classe para leitura de arquivos e credenciais, pode se usar para ler variaveis de ambiente, arquivos ou credenciais em cofres
+- Classe para leitura de arquivos e credenciais, pode se usar para ler variaveis de ambiente, arquivos ou credenciais em cofres.
 
 #### spark_config.py
 
-- Classe que estabelece com toda a configuração do spark já setada para que não seja preciso configurar o spark toda vez que se abra uma nova sessão
+- Classe que estabelece com toda a configuração do spark já setada para que não seja preciso configurar o spark toda vez que se abra uma nova sessão.
+
+#### write.py
+- Classe para facilitar a escrita dos dados em stogaes e data warehouses.
 
 #### spark_jars
 https://github.com/thiago-vale/pipeline_de_dados/tree/master/utils/spark_jars
 
-- Aqui estão os arquivos para que o spark estabeleça uma conexão com a aws
+- Aqui estão os arquivos para que o spark estabeleça uma conexão com a aws.
