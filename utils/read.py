@@ -1,10 +1,9 @@
 import boto3
-from spark_config import SparkConfig
 
 class Read():
 
     def __init__(self):
-        self.spark = SparkConfig().spark_config()
+        pass
 
     def aws_credentials(self):
         try:
@@ -19,15 +18,3 @@ class Read():
 
         except Exception as e:
             print(e)
-
-    def read_parquet(self,path):
-
-        df = self.spark.read.format('parquet').load(path)
-        
-        return df
-
-    def read_delta(self,path):
-
-        df = self.spark.read.format('delta').load(path)
-
-        return df
