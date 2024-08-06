@@ -20,6 +20,7 @@ def run_etl():
         logger.info("Data loaded successfully")
 
         # Trnaformar Dados
+        df = df.dropDuplicates()
 
         # Salvar dados no S3
         df.write.format('delta').mode('overwrite').save('s3a://datalake-test-thiago/03-gold/delta/store_sales')
