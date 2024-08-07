@@ -6,7 +6,7 @@ import os
 import sys
 sys.path.append('/home/thiago/Documentos/GitHub/pipeline_de_dados/utils')
 
-from read import Read
+from credentials import Read
 
 
 class SparkConfig():
