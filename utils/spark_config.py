@@ -10,11 +10,25 @@ from credentials import Read
 
 
 class SparkConfig():
+    """
+    A class to configure and create a SparkSession with Delta Lake integration.
+    """
 
     def __init__(self):
+        """
+        Initializes the SparkConfig class, setting up the credentials reader.
+        """
         self.read = Read()
 
     def spark_config(self):
+
+        """
+        Configures and creates a SparkSession with Delta Lake support.
+
+        Returns:
+            SparkSession: A configured SparkSession object.
+        """
+        
         aws_key , aws_pass = self.read.local_aws_credentials()
 
         config = {
