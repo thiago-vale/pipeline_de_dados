@@ -25,8 +25,7 @@ class Extract():
         Returns:
             DataFrame: The data read from the CSV file.
         """
-        df = self.spark.read.format('csv').load(path)
-
+        df = self.spark.read.csv(path, header=True, inferSchema=True)
         return df
 
     def parquet(self, path):

@@ -1,6 +1,10 @@
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
+import sys
+sys.path.append('/home/thiago/Documentos/GitHub/pipeline_de_dados/src')
+import source_to_landing
 
 default_args = {
     'owner': 'Thiago',
@@ -21,28 +25,16 @@ dag = DAG(
     max_active_runs=1,
 )
 
-source_to_landing = BashOperator(
-    task_id='source_to_landing',
-    bash_command='python3 /home/thiago/Documentos/GitHub/pipeline_de_dados/src/00_source_to_landing.py',
-    dag=dag,
-)
+def run_etl():
+    etl = source_to_landing.ETL()
+    data = etl.extract()
+    transformed_data = etl.transform(data)
+    etl.load(transformed_data)
 
-landing_to_bronze = BashOperator(
-    task_id='landing_to_bronze',
-    bash_command='python3 /home/thiago/Documentos/GitHub/pipeline_de_dados/src/01_landing_to_bronze.py',
-    dag=dag,
-)
+source_to_land = PythonOperator(
+                    task_id='source_to_landing',
+                    python_callable=run_etl,
+                    dag=dag,
+                )
 
-bronze_to_silver = BashOperator(
-    task_id='bronze_to_silver',
-    bash_command='python3 /home/thiago/Documentos/GitHub/pipeline_de_dados/src/02_bronze_to_silver.py',
-    dag=dag,
-)
-
-silver_to_gold = BashOperator(
-    task_id='silver_to_gold',
-    bash_command='python3 /home/thiago/Documentos/GitHub/pipeline_de_dados/src/03_silver_to_gold.py',
-    dag=dag,
-)
-
-source_to_landing >> landing_to_bronze >> bronze_to_silver >> silver_to_gold
+source_to_land 
