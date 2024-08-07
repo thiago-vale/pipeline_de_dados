@@ -15,7 +15,7 @@ class SparkConfig():
         self.read = Read()
 
     def spark_config(self):
-        aws_key , aws_pass = self.read.aws_credentials()
+        aws_key , aws_pass = self.read.local_aws_credentials()
 
         config = {
             'aws_access_key_id': aws_key,
