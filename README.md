@@ -30,8 +30,8 @@ Este projeto consiste no desenvolvimento de pipelines de dados para um Data Lake
 https://github.com/thiago-vale/pipeline_de_dados/blob/master/dags/spark_dag.py
 - Aqui estão os arquivos de orquestração do projeto.
 
-![](utils/images/Captura%20de%20tela%20de%202024-08-03%2011-05-00.png)
-![](utils/images/Captura%20de%20tela%20de%202024-08-03%2011-05-15.png)
+![](utils/images/Captura%20de%20tela%20de%202024-08-07%2017-27-56.png)
+![](utils/images/Captura%20de%20tela%20de%202024-08-07%2017-27-49.png)
 
 ### data
 https://github.com/thiago-vale/pipeline_de_dados/tree/master/data/raw
