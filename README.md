@@ -1,24 +1,31 @@
 # Pipeline de Dados
 
+# Pipeline de Dados
+
 https://github.com/thiago-vale/pipeline_de_dados
 
 ## Sobre o Projeto
 
-Este projeto consiste no desenvolvimento de pipelines de dados para a construção de um Delta Lake.
+Este projeto consiste no desenvolvimento de pipelines de dados para a construção de um Delta Lake utilizando uma estrutura medalion.
+
+## Próximos passos
+
+Provisionamento de infraestrutura usando terraform
+Construção de um cluster kubernetes para subir a aplicação
 
 ## Estrutura das pastas
 ```
 .
-├── dags - Arquivos para orquestração
-├── data - Dados usados no projeto
+├── dags
+├── data
 │   └── raw
-├── notebooks - Nootebooks para analise
-├── src - Pastas e Arquivos .py para realizar o ETL
+├── notebboks
+├── src
 │   ├── bronze_to_silver
 │   ├── landing_to_bronze
 │   ├── silver_to_gold
 │   └── source_to_landing
-└── utils - Classes e Objeto usados no Projeto
+└── utils
     └── spark_jars
 ```
 
@@ -31,7 +38,6 @@ Este projeto consiste no desenvolvimento de pipelines de dados para a construç�
 
 ### DAGs
 https://github.com/thiago-vale/pipeline_de_dados/blob/master/dags/spark_dag.py
-
 - Aqui estão os arquivos de orquestração do projeto.
 
 ![](utils/images/Captura%20de%20tela%20de%202024-08-07%2017-27-56.png)
@@ -45,70 +51,24 @@ https://github.com/thiago-vale/pipeline_de_dados/tree/master/data/raw
 ### src
 https://github.com/thiago-vale/pipeline_de_dados/tree/master/src
 
-- Aqui se encontram os scripts para processamento, tanformações e carregamento dos dados, os scripts estão separados de acordo com suas camadas do delta lake.
-
-![](utils/images/Captura%20de%20tela%20de%202024-08-08%2009-30-45.png)
-
-### source_to_landing
-
-- Script de ingestão da Camada Landing
-
-![](utils/images/Captura%20de%20tela%20de%202024-08-08%2009-31-18.png)
-
-### landing_to_bronze
-
-- Script de ingestão da Camada Bronze
-
-![](utils/images/Captura%20de%20tela%20de%202024-08-08%2009-31-28.png)
-
-### bronze_to_silver
-
-- Script de ingestão da Camada Silver
-
-![](utils/images/Captura%20de%20tela%20de%202024-08-08%2009-31-44.png)
-
-### silver_to_gold
-
-- Script de ingestão da Camada Gold
-
-![](utils/images/Captura%20de%20tela%20de%202024-08-08%2009-32-41.png)
-
-![](utils/images/Captura%20de%20tela%20de%202024-08-08%2009-32-57.png)
-
-![](utils/images/Captura%20de%20tela%20de%202024-08-08%2009-33-05.png)
+- Aqui se encontram os scripts para processamento, tanformações e carregamento dos dados, os scripts estão separados de acordo com suas camadas do data lake.
 
 ### utils
 https://github.com/thiago-vale/pipeline_de_dados/tree/master/utils
 
-- Aqui se encontram os arquivos usados no projeto como Configuração do Spark, jars para conexões, Classes e metodos usados ao longo do mesmo.
+- Aqui se encontram os arquivos usados no projeto como Configuração do Spark, jars para conexão com AWS, Classes e metodos usados ao longo do mesmo.
 
-#### credentials.py
-
-- Classe e metodos paa leitura das credenciais do projeto.
-
-#### etl.py
-
-- Classe Base para realização do ETL.
-
-#### extract.py
-
-- Classe contendo todos metodos para extração de dados usados no projeto.
-
-#### load.py
-
-- Classe contendo todos metodos para grvação de dados usados no projeto.
+#### read.py
+- Classe para leitura de arquivos e credenciais, pode se usar para ler variaveis de ambiente, arquivos ou credenciais em cofres.
 
 #### spark_config.py
 
-- Classe que estabelece toda a configuração do spark utilizada no projeto
+- Classe que estabelece com toda a configuração do spark já setada para que não seja preciso configurar o spark toda vez que se abra uma nova sessão.
 
-#### transform.py
-
-- Classe contendo todos metodos para tranformação de dados usados no projeto.
+#### write.py
+- Classe para facilitar a escrita dos dados em stogaes e data warehouses.
 
 #### spark_jars
 https://github.com/thiago-vale/pipeline_de_dados/tree/master/utils/spark_jars
 
-- Aqui estão .jars para o spark estabelecer conexões.
-
-PS: Este projeto por hora está sendo rodado localmente
+- Aqui estão os arquivos para que o spark estabeleça uma conexão com a aws.
