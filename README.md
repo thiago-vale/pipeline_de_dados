@@ -1,26 +1,24 @@
 # Pipeline de Dados
 
-# Pipeline de Dados
-
 https://github.com/thiago-vale/pipeline_de_dados
 
 ## Sobre o Projeto
 
-Este projeto consiste no desenvolvimento de pipelines de dados para um Data Lake.
+Este projeto consiste no desenvolvimento de pipelines de dados para a construção de um Delta Lake
 
 ## Estrutura das pastas
 ```
 .
-├── dags
-├── data
+├── dags - Arquivos para orquestração
+├── data - Dados usados no projeto
 │   └── raw
-├── notebboks
-├── src
+├── notebooks - Nootebooks para analise
+├── src - Pastas e Arquivos .py para realizar o ETL
 │   ├── bronze_to_silver
 │   ├── landing_to_bronze
 │   ├── silver_to_gold
 │   └── source_to_landing
-└── utils
+└── utils - Classes e Objeto usados no Projeto
     └── spark_jars
 ```
 
