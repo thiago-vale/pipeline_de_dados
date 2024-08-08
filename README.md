@@ -31,6 +31,7 @@ Este projeto consiste no desenvolvimento de pipelines de dados para a construç�
 
 ### DAGs
 https://github.com/thiago-vale/pipeline_de_dados/blob/master/dags/spark_dag.py
+
 - Aqui estão os arquivos de orquestração do projeto.
 
 ![](utils/images/Captura%20de%20tela%20de%202024-08-07%2017-27-56.png)
@@ -43,6 +44,8 @@ https://github.com/thiago-vale/pipeline_de_dados/tree/master/data/raw
 
 ### src
 https://github.com/thiago-vale/pipeline_de_dados/tree/master/src
+
+- Aqui se encontram os scripts para processamento, tanformações e carregamento dos dados, os scripts estão separados de acordo com suas camadas do delta lake.
 
 ![](utils/images/Captura%20de%20tela%20de%202024-08-08%2009-30-45.png)
 
@@ -74,40 +77,38 @@ https://github.com/thiago-vale/pipeline_de_dados/tree/master/src
 
 ![](utils/images/Captura%20de%20tela%20de%202024-08-08%2009-33-05.png)
 
-- Aqui se encontram os scripts para processamento, tanformações e carregamento dos dados, os scripts estão separados de acordo com suas camadas do data lake.
-
 ### utils
 https://github.com/thiago-vale/pipeline_de_dados/tree/master/utils
 
-- Aqui se encontram os arquivos usados no projeto como Configuração do Spark, jars para conexão com AWS, Classes e metodos usados ao longo do mesmo.
+- Aqui se encontram os arquivos usados no projeto como Configuração do Spark, jars para conexões, Classes e metodos usados ao longo do mesmo.
 
 #### credentials.py
 
-- Classe e methodos paa leitura das credenciais do projeto de forma anonimizada
+- Classe e metodos paa leitura das credenciais do projeto.
 
 #### etl.py
 
-- Classe Base para realização do ETL
+- Classe Base para realização do ETL.
 
 #### extract.py
 
-- Classe contendo todos metodos para extração de dados usados no projeto
+- Classe contendo todos metodos para extração de dados usados no projeto.
 
 #### load.py
 
-- Classe contendo todos metodos para grvação de dados usados no projeto
+- Classe contendo todos metodos para grvação de dados usados no projeto.
 
 #### spark_config.py
 
-- Classe que estabelece com toda a configuração do spark já setada para que não seja preciso configurar o spark toda vez que se abra uma nova sessão.
+- Classe que estabelece toda a configuração do spark utilizada no projeto
 
 #### transform.py
 
-- Classe contendo todos metodos para tranformação de dados usados no projeto
+- Classe contendo todos metodos para tranformação de dados usados no projeto.
 
 #### spark_jars
 https://github.com/thiago-vale/pipeline_de_dados/tree/master/utils/spark_jars
 
-- Aqui estão os arquivos para que o spark estabeleça uma conexão com a aws.
+- Aqui estão .jars para o spark estabelecer conexões.
 
 PS: Este projeto por hora está sendo rodado localmente
