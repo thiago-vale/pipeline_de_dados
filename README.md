@@ -1,7 +1,5 @@
 # Pipeline de Dados
 
-# Pipeline de Dados
-
 https://github.com/thiago-vale/pipeline_de_dados
 
 ## Sobre o Projeto
