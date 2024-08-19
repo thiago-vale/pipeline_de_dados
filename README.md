@@ -8,8 +8,8 @@ Este projeto consiste no desenvolvimento de pipelines de dados para a construç�
 
 ## Próximos passos
 
-Provisionamento de infraestrutura usando terraform
-Construção de um cluster kubernetes para subir a aplicação
+- Construção de um cluster kubernetes para subir a aplicação
+- Provisionamento de infraestrutura usando terraform 
 
 ## Estrutura das pastas
 ```
