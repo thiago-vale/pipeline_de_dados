@@ -56,18 +56,18 @@ class SparkConfig():
                 .set("spark.sql.legacy.timeParserPolicy", "LEGACY")
                 .set('spark.network.timeout', '100000000')
                 .set('spark.executor.heartbeatInterval', '100000000')
-                .set('spark.executor.memory', '12G') #quanto aloca memória local
-                .set('spark.driver.memory', '4G') #quanto de dados pode trafegar
+                .set('spark.executor.memory', '12G')
+                .set('spark.driver.memory', '4G')
                 .set('spark.memory.offHeap.enabled', 'true')
                 .set('spark.memory.offHeap.size', '4G' )
                 .set('spark.sql.autoBroadcastJoinThreshold', '-1')
                 .set('spark.sql.broadcastTimeout', '300000')  
-                .set('spark.executor.cores', '4') #quantos cores
+                .set('spark.executor.cores', '4')
                 .set('spark.executor.instances', '2')
-                .set('spark.default.parallelism', '2') #especifica para rodar 2 fluxos em paralelo
+                .set('spark.default.parallelism', '2')
                 .set('spark.sql.debug.maxToStringFields', 1000)
                 .set('spark.kryoserializer.buffer.max', 2047)
-                .set('spark.serializer', 'org.apache.spark.serializer.KryoSerializer') #organizar em série
+                .set('spark.serializer', 'org.apache.spark.serializer.KryoSerializer')
                 .set('spark.jars', spark_jars)
                 .set('spark.ui.showConsoleProgress', True)
                 .set('spark.logConf', True)
