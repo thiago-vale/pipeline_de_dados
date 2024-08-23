@@ -76,6 +76,10 @@ class SparkConfig():
                 .set("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
                 .set('spark.delta.logStore.class', 'org.apache.spark.sql.delta.storage.S3SingleDriverLogStore')
                 .set('spark.sql.parquet.compression.codec', 'snappy')
+                .set("spark.eventLog.enabled", True)
+                .set("spark.eventLog.dir", "/home/thiago/Documentos/GitHub/pipeline_de_dados/logs/spark-events")
+                .set("spark.eventLog.logBlockUpdates.enabled", "true")
+                .set("spark.eventLog.jsonFormat.enabled", "true")
             )
 
         spark = (
