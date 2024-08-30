@@ -41,7 +41,8 @@ class SparkConfig():
         spark_jars = '''
             /home/thiago/Documentos/GitHub/pipeline_de_dados/utils/spark_jars/aws-java-sdk-1.7.4.jar,
             /home/thiago/Documentos/GitHub/pipeline_de_dados/utils/spark_jars/hadoop-aws-2.7.7.jar,
-            /home/thiago/Documentos/GitHub/pipeline_de_dados/utils/spark_jars/jets3t-0.9.4.jar
+            /home/thiago/Documentos/GitHub/pipeline_de_dados/utils/spark_jars/jets3t-0.9.4.jar,
+            /home/thiago/Documentos/GitHub/pipeline_de_dados/utils/spark_jars/spark-measure_2.12-0.24.jar
             '''
 
         conf = (
