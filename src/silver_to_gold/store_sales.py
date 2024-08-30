@@ -14,7 +14,7 @@ from sparkmeasure import StageMetrics
 class ETL(Base):
 
     def __init__(self):
-        self.extractor = Extract()
+        self.extractor = Extract('silver_to_gold_store_sales')
         self.loader = Load()
         self.metrcis = StageMetrics(self.extractor.session())
 
@@ -34,7 +34,9 @@ class ETL(Base):
 
         self.metrcis.end()
         self.metrcis.print_report()
+
         metrics = "/home/thiago/Documentos/GitHub/pipeline_de_dados/metrics/silver_to_gold/store_sales/"
+        
         df_stage_metrics = self.metrcis.create_stagemetrics_DF("PerfStageMetrics")
         df_stage_metrics.repartition(1).orderBy("jobId", "stageId").write.mode("overwrite").json(metrics + "stagemetrics")
 

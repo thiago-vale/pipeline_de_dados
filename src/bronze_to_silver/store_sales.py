@@ -14,7 +14,7 @@ from sparkmeasure import StageMetrics
 class ETL(Base):
 
     def __init__(self):
-        self.extractor = Extract()
+        self.extractor = Extract('bronze_to_silver_store_sales')
         self.loader = Load()
         self.metrcis = StageMetrics(self.extractor.session())
 

@@ -9,7 +9,7 @@ from sparkmeasure import StageMetrics
 class ETL(Base):
 
     def __init__(self):
-        self.extractor = Extract()
+        self.extractor = Extract('source_to_landing_train')
         self.loader = Load()
         self.metrcis = StageMetrics(self.extractor.session())
 
@@ -30,6 +30,7 @@ class ETL(Base):
         self.metrcis.print_report()
 
         metrics = "/home/thiago/Documentos/GitHub/pipeline_de_dados/metrics/source_to_landing/train/"
+        
         df_stage_metrics = self.metrcis.create_stagemetrics_DF("PerfStageMetrics")
         df_stage_metrics.repartition(1).orderBy("jobId", "stageId").write.mode("overwrite").json(metrics + "stagemetrics")
 

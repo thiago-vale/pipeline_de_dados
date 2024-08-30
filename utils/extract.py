@@ -8,11 +8,14 @@ class Extract():
         spark (SparkSession): A SparkSession object configured using SparkConfig.
     """
 
-    def __init__(self):
+    def __init__(self,appname):
         """
         Initializes the Extract class, setting up the Spark configuration.
+
+        Args:
+            appname (str): The App Name.
         """
-        self.spark = SparkConfig().spark_config()
+        self.spark = SparkConfig().spark_config(appname)
 
     def session(self):
         """

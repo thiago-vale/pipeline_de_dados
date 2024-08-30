@@ -9,13 +9,13 @@ from sparkmeasure import StageMetrics
 class ETL(Base):
 
     def __init__(self):
-        self.metrcis.begin()
-        self.extractor = Extract()
+        self.extractor = Extract('source_to_landing_test')
         self.loader = Load()
         self.metrcis = StageMetrics(self.extractor.session())
 
 
     def extract(self):
+        self.metrcis.begin()
         df = self.extractor.csv("/home/thiago/Documentos/GitHub/pipeline_de_dados/data/raw/test.csv")
         print("extract")
         return df
@@ -26,7 +26,11 @@ class ETL(Base):
     def load(self,df):
         self.loader.parquet(df, 'full', 's3a://datalake-test-thiago/00-landing/spark/test')
         print("load")
+        self.metrcis.end()
+        self.metrcis.print_report()
+
         metrics = "/home/thiago/Documentos/GitHub/pipeline_de_dados/metrics/source_to_landing/test/"
+
         df_stage_metrics = self.metrcis.create_stagemetrics_DF("PerfStageMetrics")
         df_stage_metrics.repartition(1).orderBy("jobId", "stageId").write.mode("overwrite").json(metrics + "stagemetrics")
 

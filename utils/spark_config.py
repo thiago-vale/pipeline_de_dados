@@ -20,13 +20,17 @@ class SparkConfig():
         """
         self.read = Read()
 
-    def spark_config(self):
+    def spark_config(self,appname):
 
         """
         Configures and creates a SparkSession with Delta Lake support.
 
+        Args:
+            appname (str): The App Name.
+
         Returns:
             SparkSession: A configured SparkSession object.
+            
         """
         
         aws_key , aws_pass = self.read.local_aws_credentials()
@@ -89,7 +93,7 @@ class SparkConfig():
                 .config(conf=conf)
                 .config("spark.jars.packages", "io.delta:delta-core_2.12:1.0.0")
                 .master('local[*]')
-                .appName('PySpark')
+                .appName(appname)
             )
         
         spark = configure_spark_with_delta_pip(spark).getOrCreate()
