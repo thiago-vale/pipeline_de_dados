@@ -41,7 +41,8 @@ class SparkConfig():
         spark_jars = '''
             /home/thiago/Documentos/GitHub/pipeline_de_dados/utils/spark_jars/aws-java-sdk-1.7.4.jar,
             /home/thiago/Documentos/GitHub/pipeline_de_dados/utils/spark_jars/hadoop-aws-2.7.7.jar,
-            /home/thiago/Documentos/GitHub/pipeline_de_dados/utils/spark_jars/jets3t-0.9.4.jar
+            /home/thiago/Documentos/GitHub/pipeline_de_dados/utils/spark_jars/jets3t-0.9.4.jar,
+            /home/thiago/Documentos/GitHub/pipeline_de_dados/utils/spark_jars/spark-measure_2.12-0.24.jar
             '''
 
         conf = (
@@ -76,6 +77,10 @@ class SparkConfig():
                 .set("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
                 .set('spark.delta.logStore.class', 'org.apache.spark.sql.delta.storage.S3SingleDriverLogStore')
                 .set('spark.sql.parquet.compression.codec', 'snappy')
+                .set("spark.eventLog.enabled", True)
+                .set("spark.eventLog.dir", "/home/thiago/Documentos/GitHub/pipeline_de_dados/logs/spark-events")
+                .set("spark.eventLog.logBlockUpdates.enabled", "true")
+                .set("spark.eventLog.jsonFormat.enabled", "true")
             )
 
         spark = (

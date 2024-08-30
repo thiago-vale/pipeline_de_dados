@@ -14,7 +14,12 @@ class Extract():
         """
         self.spark = SparkConfig().spark_config()
 
-
+    def session(self):
+        """
+        Returns the SparkSession object.
+        """
+        return self.spark
+    
     def csv(self, path):
         """
         Reads a CSV file from the specified path and returns it as a DataFrame.
