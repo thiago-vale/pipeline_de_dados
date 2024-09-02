@@ -44,13 +44,13 @@ def source_to_landing_train():
     etl.load(transformed_data)
 
 def source_to_landing_test():
-    etl = source_to_landing.train.ETL()
+    etl = source_to_landing.test.ETL()
     data = etl.extract()
     transformed_data = etl.transform(data)
     etl.load(transformed_data)
 
 def source_to_landing_store():
-    etl = source_to_landing.train.ETL()
+    etl = source_to_landing.store.ETL()
     data = etl.extract()
     transformed_data = etl.transform(data)
     etl.load(transformed_data)
@@ -68,7 +68,7 @@ def landing_to_bronze_test():
     etl.load(transformed_data)
 
 def landing_to_bronze_store():
-    etl = landing_to_bronze.test.ETL()
+    etl = landing_to_bronze.store.ETL()
     data = etl.extract()
     transformed_data = etl.transform(data)
     etl.load(transformed_data)
