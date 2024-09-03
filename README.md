@@ -17,6 +17,13 @@ Este projeto consiste no desenvolvimento de pipelines de dados para a construç�
 ├── dags
 ├── data
 │   └── raw
+├── logs
+│   └── spark-events
+├── metrics
+│   ├── bronze_to_silver
+│   ├── landing_to_bronze
+│   ├── silver_to_gold
+│   └── source_to_landing
 ├── notebboks
 ├── src
 │   ├── bronze_to_silver
