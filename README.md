@@ -61,7 +61,7 @@ https://github.com/thiago-vale/pipeline_de_dados/tree/master/logs
 
 Exemplo de como ver os spark-events pelo Spark History server
 
-![](utils/images/Captura de tela de 2024-09-03 14-25-46.png)
+![](utils/images/Captura%20de%20tela%20de%202024-09-03%2014-25-46.png)
 
 ### metrics
 
@@ -71,7 +71,7 @@ https://github.com/thiago-vale/pipeline_de_dados/tree/master/metrics
 
 Exemplo de metrica que pode ser coletada
 
-![](utils/images/Captura de tela de 2024-08-30 10-17-31.png)
+![](utils/images/Captura%20de%20tela%20de%202024-08-30%2010-17-31.png)
 
 ### src
 https://github.com/thiago-vale/pipeline_de_dados/tree/master/src
