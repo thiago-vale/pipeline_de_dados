@@ -59,11 +59,19 @@ https://github.com/thiago-vale/pipeline_de_dados/tree/master/logs
 
 - Aqui se encontram os logs como eventos do spark e logs do pipeline para análise.
 
+Exemplo de como ver os spark-events pelo Spark History server
+
+![](utils/images/Captura de tela de 2024-09-03 14-25-46.png)
+
 ### metrics
 
 https://github.com/thiago-vale/pipeline_de_dados/tree/master/metrics
 
-aqui se encontram as métricas dos pipelines coletadas com Spark Measure
+- Aqui se encontram as métricas dos pipelines coletadas com Spark Measure
+
+Exemplo de metrica que pode ser coletada
+
+![](utils/images/Captura de tela de 2024-08-30 10-17-31.png)
 
 ### src
 https://github.com/thiago-vale/pipeline_de_dados/tree/master/src
