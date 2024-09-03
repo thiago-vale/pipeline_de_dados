@@ -53,6 +53,18 @@ https://github.com/thiago-vale/pipeline_de_dados/tree/master/data/raw
 
 - Aqui se encontram os dados usados para no projeto.
 
+### logs
+
+https://github.com/thiago-vale/pipeline_de_dados/tree/master/logs
+
+- Aqui se encontram os logs como eventos do spark e logs do pipeline para análise.
+
+### metrics
+
+https://github.com/thiago-vale/pipeline_de_dados/tree/master/metrics
+
+aqui se encontram as métricas dos pipelines coletadas com Spark Measure
+
 ### src
 https://github.com/thiago-vale/pipeline_de_dados/tree/master/src
 
