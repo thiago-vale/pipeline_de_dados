@@ -11,11 +11,11 @@ class ETL(Base):
     def __init__(self):
         self.extractor = Extract('source_to_landing_train')
         self.loader = Load()
-        self.metrcis = StageMetrics(self.extractor.session())
+        self.metrics = StageMetrics(self.extractor.session())
 
 
     def extract(self):
-        self.metrcis.begin()
+        self.metrics.begin()
         df = self.extractor.csv("/home/thiago/Documentos/GitHub/pipeline_de_dados/data/raw/train.csv")
         print("extract")
         return df
@@ -26,8 +26,8 @@ class ETL(Base):
     def load(self,df):
         self.loader.parquet(df, 'full', 's3a://datalake-test-thiago/00-landing/spark/train')
         print("load")
-        self.metrcis.end()
-        self.metrcis.print_report()
+        self.metrics.end()
+        self.metrics.print_report()
 
         metrics = "s3a://datalake-test-thiago/99-logs/metrics/source_to_landing/train/"
         

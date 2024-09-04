@@ -16,10 +16,10 @@ class ETL(Base):
     def __init__(self):
         self.extractor = Extract('silver_to_gold_store_sales')
         self.loader = Load()
-        self.metrcis = StageMetrics(self.extractor.session())
+        self.metrics = StageMetrics(self.extractor.session())
 
     def extract(self):
-        self.metrcis.begin()
+        self.metrics.begin()
         df = self.extractor.delta('s3a://datalake-test-thiago/02-silver/delta/store_sales/')
         print("extract")
         return df
@@ -34,13 +34,13 @@ class ETL(Base):
 
         df.sparkSession.sql("OPTIMIZE delta.`s3a://datalake-test-thiago/03-gold/delta/store_sales/`")
         
-        self.metrcis.end()
-        self.metrcis.print_report()
+        self.metrics.end()
+        self.metrics.print_report()
 
         metrics = "s3a://datalake-test-thiago/99-logs/metrics/silver_to_gold/store_sales/"
         
-        df_stage_metrics = self.metrcis.create_stagemetrics_DF("PerfStageMetrics")
+        df_stage_metrics = self.metrics.create_stagemetrics_DF("PerfStageMetrics")
         df_stage_metrics.repartition(1).orderBy("jobId", "stageId").write.mode("overwrite").json(metrics + "stagemetrics")
 
-        df_aggregated_metrics = self.metrcis.aggregate_stagemetrics_DF("PerfStageMetrics")
+        df_aggregated_metrics = self.metrics.aggregate_stagemetrics_DF("PerfStageMetrics")
         df_aggregated_metrics.write.mode("overwrite").json(metrics + "stagemetrics_agg")
