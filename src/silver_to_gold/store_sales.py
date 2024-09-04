@@ -37,7 +37,7 @@ class ETL(Base):
         self.metrcis.end()
         self.metrcis.print_report()
 
-        metrics = "/home/thiago/Documentos/GitHub/pipeline_de_dados/metrics/silver_to_gold/store_sales/"
+        metrics = "s3a://datalake-test-thiago/99-logs/metrics/silver_to_gold/store_sales/"
         
         df_stage_metrics = self.metrcis.create_stagemetrics_DF("PerfStageMetrics")
         df_stage_metrics.repartition(1).orderBy("jobId", "stageId").write.mode("overwrite").json(metrics + "stagemetrics")
