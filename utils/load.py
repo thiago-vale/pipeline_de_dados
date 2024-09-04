@@ -58,23 +58,26 @@ class Load():
             
             self.logger.info("mode not found")
     
-    def delta(self, df, mode, path):
+    def delta(self, df, mode, path, partition_column=None):
         """
-        Writes a DataFrame to a Delta file with the specified mode.
+        Writes a DataFrame to a Delta file with the specified mode and partitioning.
 
         Args:
             df (DataFrame): The DataFrame to write.
             mode (str): The write mode ('incremen' for append, 'full' for overwrite).
             path (str): The path where the Delta file will be saved.
+            partition_column (str or list of str, optional): Column or list of columns to partition by.
         """
         if mode == 'incremen':
-
-            df.write.format("delta").mode('append').save(path)
-        
+            writer = df.write.format("delta").mode('append')
         elif mode == 'full':
-
-            df.write.format("delta").mode('overwrite').save(path)
-
+            writer = df.write.format("delta").mode('overwrite')
         else:
-            
             self.logger.info("mode not found")
+            return
+        
+        # Adiciona a partição se especificada
+        if partition_column:
+            writer = writer.partitionBy(partition_column)
+        
+        writer.save(path)
