@@ -76,7 +76,7 @@ Exemplo de metrica que pode ser coletada
 ### src
 https://github.com/thiago-vale/pipeline_de_dados/tree/master/src
 
-- Aqui se encontram os scripts para processamento, tanformações e carregamento dos dados, os scripts estão separados de acordo com suas camadas do data lake.
+- Aqui se encontram os scripts para processamento, tansformações e carregamento dos dados, os scripts estão separados de acordo com suas camadas do data lake.
 
 ### utils
 https://github.com/thiago-vale/pipeline_de_dados/tree/master/utils
