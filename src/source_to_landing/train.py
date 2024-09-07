@@ -29,12 +29,12 @@ class ETL(Base):
         self.metrics.end()
         self.metrics.print_report()
 
-        metrics = "s3a://datalake-test-thiago/99-logs/metrics/source_to_landing/train/"
+        metrics = ".../metrics/source_to_landing/train/"
         
-        df_stage_metrics = self.metrcis.create_stagemetrics_DF("PerfStageMetrics")
+        df_stage_metrics = self.metrics.create_stagemetrics_DF("PerfStageMetrics")
         df_stage_metrics.repartition(1).orderBy("jobId", "stageId").write.mode("overwrite").json(metrics + "stagemetrics")
 
-        df_aggregated_metrics = self.metrcis.aggregate_stagemetrics_DF("PerfStageMetrics")
+        df_aggregated_metrics = self.metrics.aggregate_stagemetrics_DF("PerfStageMetrics")
         df_aggregated_metrics.write.mode("overwrite").json(metrics + "stagemetrics_agg")
 
 

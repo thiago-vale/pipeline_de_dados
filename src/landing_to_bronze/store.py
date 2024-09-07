@@ -29,7 +29,7 @@ class ETL(Base):
         self.metrics.end()
         self.metrics.print_report()
 
-        metrics = "s3a://datalake-test-thiago/99-logs/metrics/landing_to_bronze/store/"
+        metrics = ".../metrics/landing_to_bronze/store/"
         
         df_stage_metrics = self.metrics.create_stagemetrics_DF("PerfStageMetrics")
         df_stage_metrics.repartition(1).orderBy("jobId", "stageId").write.mode("overwrite").json(metrics + "stagemetrics")

@@ -84,7 +84,7 @@ class ETL(Base):
         return df
 
     def load(self,df):
-        self.loader.delta(df, 'full', 's3a://datalake-test-thiago/02-silver/delta/store_sales/')
+        self.loader.delta(df, 'full', 's3a://datalake-test-thiago/02-silver/delta/store_sales/',partition_column='date')
         print("load")
         
         df.sparkSession.sql("OPTIMIZE delta.`s3a://datalake-test-thiago/02-silver/delta/store_sales/`")
@@ -92,7 +92,7 @@ class ETL(Base):
         self.metrics.end()
         self.metrics.print_report()
 
-        metrics = "s3a://datalake-test-thiago/99-logs/metrics/bronze_to_silver/store_sales/"
+        metrics = ".../metrics/bronze_to_silver/store_sales/"
 
         df_stage_metrics = self.metrics.create_stagemetrics_DF("PerfStageMetrics")
         df_stage_metrics.repartition(1).orderBy("jobId", "stageId").write.mode("overwrite").json(metrics + "stagemetrics")
