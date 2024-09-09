@@ -29,10 +29,10 @@ class ETL(Base):
         return df
 
     def load(self,df):
-        self.loader.delta(df, 'full', 's3a://datalake-test-thiago/03-gold/delta/store_sales/',partition_column='date')
+        self.loader.delta(df, 'full', 's3a://datalake-test-thiago/03-gold/delta/store_sales/')
         print("load")
 
-        df.sparkSession.sql("OPTIMIZE delta.`s3a://datalake-test-thiago/03-gold/delta/store_sales/`")
+        # df.sparkSession.sql("OPTIMIZE delta.`s3a://datalake-test-thiago/03-gold/delta/store_sales/`")
         
         self.metrics.end()
         self.metrics.print_report()
